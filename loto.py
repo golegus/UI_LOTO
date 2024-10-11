@@ -97,25 +97,30 @@ def print_card(card: Card):
             print(" ".join(formatted_keys))
     print('-'*28)
 
+def main():
+    computer_card=Card('Карточка компьютера')
+    my_card=Card('Ваша карточка')
+    bag=Out_Bag()
+    while bag.get_rest()>0:
+        print_card(my_card)
+        print_card(computer_card)
+        cur_num=bag.get_num()
+        print(f'Вытащили бочонок по номером {cur_num}. Осталось {bag.get_rest()} бочонков.')
+        answer=input(f'Зачеркнуть цифру? y/n ')
 
-computer_card=Card('Карточка компьютера')
-my_card=Card('Ваша карточка')
-bag=Out_Bag()
-while bag.get_rest()>0:
-    print_card(my_card)
-    print_card(computer_card)
-    cur_num=bag.get_num()
-    print(f'Вытащили бочонок по номером {cur_num}. Осталось {bag.get_rest()} бочонков.')
-    answer=input(f'Зачеркнуть цифру? y/n ')
+        if answer=='y':
+            if not my_card.check(cur_num):
+                print(f'В Вашей карточке нет номера {cur_num}! Вы проиграли...')
+                exit()
 
-    if answer=='y':
-        if not my_card.check(cur_num):
-            print(f'В Вашей карточке нет номера {cur_num}! Вы проиграли...')
-            exit()
+        if answer=='n':
+            if my_card.check(cur_num):
+                print(f'В Вашей карточке есть номер {cur_num}! Вы проиграли...')
+                exit() 
 
-    if answer=='n':
-        if my_card.check(cur_num):
-            print(f'В Вашей карточке есть номер {cur_num}! Вы проиграли...')
-            exit() 
+        computer_card.check(cur_num)
 
-    computer_card.check(cur_num)
+if __name__ == "__main__":
+    
+    main()
+    
