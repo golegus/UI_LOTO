@@ -32,6 +32,14 @@ class Card():
                 group[num]=True
                 return True
         return False
+    
+    def full(self):
+        for group in self.card:
+            if not all(group.values()):
+                return False
+        return True
+    
+
 
 
 
@@ -118,7 +126,17 @@ def main():
                 print(f'В Вашей карточке есть номер {cur_num}! Вы проиграли...')
                 exit() 
 
+        if my_card.full():
+            print(f'Вы выиграли. Поздравляю!')
+            exit()
+
         computer_card.check(cur_num)
+
+        if computer_card.full():
+            print(f'Компютер выиграл. Увы...')
+            exit()
+
+
 
 if __name__ == "__main__":
     
